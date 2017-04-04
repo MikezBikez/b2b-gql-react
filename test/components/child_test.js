@@ -1,7 +1,7 @@
 import { renderComponent , expect } from '../test_helper'
-import App from '../../client/components/App'
+import App from '../../client/components/child/Hello'
 
-describe('App' , () => {
+describe('Child' , () => {
   let component
 
   beforeEach(() => {
@@ -12,13 +12,8 @@ describe('App' , () => {
     expect(component).to.exist
   })
 
-  it('is a container', () => {
-    expect(component).to.have.class('container')
-  })
-  
   it('shows the correct text', () => {
-    expect(component).to.contain('The App')
+    expect(component).to.contain('Hello Son')
   })
-
 
 })
