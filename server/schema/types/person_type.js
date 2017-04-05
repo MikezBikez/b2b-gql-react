@@ -13,6 +13,7 @@ const PersonType = new GraphQLObjectType({
     name: { type: GraphQLString },
     surname: { type: GraphQLString },
     lastAttend: { type: GraphQLDate },
+    // lastAttend: { type: GraphQLString },
     avatar: { type: GraphQLString }
   }
 })

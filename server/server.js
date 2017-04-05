@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const expressGraphQL = require('express-graphql')
+const models = require('./models')
 const mongoose = require('mongoose')
 const schema = require('./schema/schema');
 

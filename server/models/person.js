@@ -6,7 +6,7 @@ const PersonSchema = new Schema({
   name: String,
   surname: String,
   avatar: String,
-  lastAttended: String,
+  lastAttend: Date,
 });
 
 mongoose.model('person', PersonSchema);

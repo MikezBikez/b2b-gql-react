@@ -1,1 +1,1 @@
-import person from './person'
+require('./person')
