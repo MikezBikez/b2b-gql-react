@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 
 import App from './components/App'
 
@@ -17,6 +17,13 @@ const componentRoutes = {
           .then(module => cb(null, module.default) )
       },
     },
+    {  
+      path: 'people/list',
+      getComponent(location, cb) {
+        System.import('./components/PeopleList')
+          .then(module => cb(null, module.default) )
+      },
+    }
   ]
 }
 
