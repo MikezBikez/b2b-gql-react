@@ -38,11 +38,18 @@ const mutation = new GraphQLObjectType({
     updatePerson: {
       type: PersonType,
       args: {
+        id: {type: GraphQLID},
         name: {type: GraphQLString},
         surname: {type: GraphQLString},
         avatar: {type: GraphQLString},
       },
-      resolve(parentValue, {name, surname, avatar} , req) {
+      resolve(parentValue, args , req) {
+        return Person.findById(args.id).then(p => {
+          p.name = (args.name) ? args.name : p.name
+          p.surname = (args.surname) ? args.surname : p.surname
+          p.avatar= (args.avatar) ? args.avatar : p.avatar
+          return p.save()
+        })
       }
     },    
     checkIn: {
