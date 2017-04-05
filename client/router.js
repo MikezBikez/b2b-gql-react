@@ -23,6 +23,20 @@ const componentRoutes = {
         System.import('./components/PeopleList')
           .then(module => cb(null, module.default) )
       },
+    },
+    {  
+      path: 'people/whosIn',
+      getComponent(location, cb) {
+        System.import('./components/CheckedInList')
+          .then(module => cb(null, module.default) )
+      },
+    },
+    {  
+      path: 'people/checkIn',
+      getComponent(location, cb) {
+        System.import('./components/CheckIn')
+          .then(module => cb(null, module.default) )
+      },
     }
   ]
 }
