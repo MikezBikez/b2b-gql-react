@@ -22,6 +22,13 @@ const RootQueryType = new GraphQLObjectType({
         return Person.find({lastAttend: suga.Date.create('today')})
       }
     },
+    notCheckedIn: {
+      type:  new GraphQLList(PersonType),
+      args: {},
+      resolve(parentValue, args, req) {
+        return Person.find({lastAttend: { $ne: suga.Date.create('today') } })
+      }
+    },
   }
 })
 
