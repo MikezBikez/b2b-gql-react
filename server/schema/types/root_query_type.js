@@ -8,6 +8,15 @@ const suga = require('sugar')
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
+    person: {
+      type: PersonType,
+      args: {
+        id: {type: GraphQLID},
+      },
+      resolve(parentValue, {id}, req) {
+        return Person.findById({_id: id})
+      }
+    },
     people: {
       type:  new GraphQLList(PersonType),
       args: {},

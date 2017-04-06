@@ -57,8 +57,8 @@ const mutation = new GraphQLObjectType({
       args: {
         id: {type: GraphQLID}
       },
-      resolve(parentValue, {id} , req) {
-        return Person.findById(id).then(p => {
+      resolve(parentValue, args, req) {
+        return Person.findById(args.id).then(p => {
           p.lastAttend = suga.Date.create('today')
           return p.save()
         })
