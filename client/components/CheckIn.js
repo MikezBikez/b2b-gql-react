@@ -22,9 +22,13 @@ class CheckIn extends Component {
         <li 
           key={id} 
           className="collection-item"
-          onClick={ () => this.handleCheckin(id) }
+          
         >
           {name} {surname}
+            <a className="waves-effect waves-light btn right floated"
+              onClick={ () => this.handleCheckin(id) } >
+              Checkin
+            </a>
         </li>
       )}
     ))

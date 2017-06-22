@@ -57,6 +57,7 @@ const componentRoutes = {
 
 const Routes = () => {
   return (
+
     <Router history={hashHistory} routes={componentRoutes} />
   )
 }
