@@ -2,17 +2,28 @@ import React, {Component} from 'react'
 import {graphql} from 'react-apollo'
 import query from '../queries/CheckedInList'
 import Loader from './Loader'
+import {hashHistory} from 'react-router'
 
 class CheckedInList extends Component {
   constructor(props) {
     super(props)
+
+    this.handleCheckout.bind(this)
+  }
+
+
+  handleCheckout (id) {
+    hashHistory.push(`/people/${id}/confirmCheckout`)
   }
   
   renderItems () {
     return ( 
       this.props.data.checkedIn.map( ({ id, name, surname}) => {
       return (
-        <li key={id} className="collection-item">{name} {surname}</li>
+        <li key={id} className="collection-item"
+          onClick={ () => this.handleCheckout(id) }>
+          {name} {surname}
+        </li>
       )}
     ))
   }

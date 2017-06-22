@@ -44,6 +44,13 @@ const componentRoutes = {
         System.import('./components/ConfirmCheckin')
           .then(module => cb(null, module.default) )
       },
+    },
+    {  
+      path: 'people/:id/confirmCheckout',
+      getComponent(location, cb) {
+        System.import('./components/ConfirmCheckout')
+          .then(module => cb(null, module.default) )
+      },
     }
   ]
 }

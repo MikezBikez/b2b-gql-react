@@ -59,7 +59,20 @@ const mutation = new GraphQLObjectType({
       },
       resolve(parentValue, args, req) {
         return Person.findById(args.id).then(p => {
-          p.lastAttend = suga.Date.create('today')
+          p.lastAttend = suga.Date.create('yesterday')
+          p.isCheckedIn = true;
+          return p.save()
+        })
+      }
+    },
+    checkOut: {
+      type: PersonType,
+      args: {
+        id: {type: GraphQLID}
+      },
+      resolve(parentValue, args, req) {
+        return Person.findById(args.id).then(p => {
+          p.isCheckedIn = false;
           return p.save()
         })
       }

@@ -2,7 +2,8 @@ const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLID,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLBoolean
 } = require('graphql')
 const GraphQLDate = require('graphql-custom-datetype')
 
@@ -14,7 +15,8 @@ const PersonType = new GraphQLObjectType({
     surname: { type: GraphQLString },
     lastAttend: { type: GraphQLDate },
     // lastAttend: { type: GraphQLString },
-    avatar: { type: GraphQLString }
+    avatar: { type: GraphQLString },
+    isCheckedIn: { type: GraphQLBoolean },
   }
 })
 

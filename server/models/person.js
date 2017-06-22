@@ -7,6 +7,7 @@ const PersonSchema = new Schema({
   surname: String,
   avatar: String,
   lastAttend: Date,
+  isCheckedIn: Boolean
 });
 
 mongoose.model('person', PersonSchema);

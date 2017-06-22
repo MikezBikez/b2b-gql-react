@@ -3,7 +3,7 @@ import {graphql} from 'react-apollo'
 import query from '../queries/personFetch'
 import nextQuery from '../queries/CheckedInList'
 import otherQuery from '../queries/notCheckedInList'
-import mutation from '../mutations/CheckIn'
+import {CheckInMutation} from '../mutations/CheckIn'
 import Loader from './Loader'
 import {hashHistory} from 'react-router'
 
@@ -51,5 +51,5 @@ export default graphql(query,
   {
     options: (props) => { return {variables: {id: props.params.id} }}
   })
-  (graphql(mutation)(ConfirmCheckin)
+  (graphql(CheckInMutation)(ConfirmCheckin)
 )

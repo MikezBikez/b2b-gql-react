@@ -8,6 +8,7 @@ export default gql`
       surname
       avatar
       lastAttend
+      isCheckedIn
     }
   }
 `
