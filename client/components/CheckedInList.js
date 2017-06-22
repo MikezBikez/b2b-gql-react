@@ -21,8 +21,12 @@ class CheckedInList extends Component {
       this.props.data.checkedIn.map( ({ id, name, surname}) => {
       return (
         <li key={id} className="collection-item"
-          onClick={ () => this.handleCheckout(id) }>
+          >
           {name} {surname}
+            <a className="waves-effect waves-light btn btn-xs mini right floated"
+              onClick={ () => this.handleCheckout(id) } >
+              Checkout
+            </a>
         </li>
       )}
     ))
@@ -34,7 +38,7 @@ class CheckedInList extends Component {
 
     return (
       <ul className="collection with-header">
-        <li className="collection-header"><h4>These People have Checked In today</h4></li>
+        <li className="collection-header"><h4>People checked in</h4></li>
         {this.renderItems()}
       </ul>
     ) 

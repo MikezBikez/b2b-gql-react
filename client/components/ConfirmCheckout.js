@@ -3,11 +3,11 @@ import {graphql} from 'react-apollo'
 import query from '../queries/personFetch'
 import nextQuery from '../queries/CheckedInList'
 import otherQuery from '../queries/notCheckedInList'
-import {CheckIn} from '../mutations/CheckInOut'
+import {CheckOut} from '../mutations/CheckInOut'
 import Loader from './Loader'
 import {hashHistory} from 'react-router'
 
-class ConfirmCheckin extends Component {
+class ConfirmCheckout extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -15,7 +15,7 @@ class ConfirmCheckin extends Component {
     }
   }
 
-  handleCheckin (id) {
+  handleCheckout (id) {
     this.props.mutate({
       variables: {id},
       refetchQueries: [{ query: nextQuery }, { query: otherQuery }]
@@ -40,7 +40,7 @@ class ConfirmCheckin extends Component {
         </div>
         <div className="card-action">
           <a onClick={ () => this.handleCancel() } className="waves-effect waves-light btn-flat">cancel</a>
-          <a onClick={ () => this.handleCheckin(id) } className="waves-effect waves-light btn">check in</a>
+          <a onClick={ () => this.handleCheckout(id) } className="waves-effect waves-light btn">check out</a>
         </div>
       </div>
     ) 
@@ -51,5 +51,5 @@ export default graphql(query,
   {
     options: (props) => { return {variables: {id: props.params.id} }}
   })
-  (graphql(CheckIn)(ConfirmCheckin)
+  (graphql(CheckOut)(ConfirmCheckout)
 )

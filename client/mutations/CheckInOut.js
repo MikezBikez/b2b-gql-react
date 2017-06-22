@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-let CheckInMutation = gql`
+let CheckIn = gql`
   mutation CheckIn($id: ID)
   {
     checkIn(id: $id){
@@ -22,4 +22,4 @@ let CheckOut = gql`
 `
 
 
-export {CheckInMutation, CheckOut};
+export {CheckIn, CheckOut};
