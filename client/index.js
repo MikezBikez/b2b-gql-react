@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import ApolloClient, {createNetworkInterface} from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
 import Routes from './router'
+// import 'semantic-ui-css/semantic.min.css'
 
 const networkInterface = createNetworkInterface({
   uri: '/graphql',

@@ -5,7 +5,11 @@ import nextQuery from '../queries/CheckedInList'
 import otherQuery from '../queries/notCheckedInList'
 import mutation from '../mutations/CheckIn'
 import Loader from './Loader'
+import Avatar from './Avatar'
+
 import {hashHistory} from 'react-router'
+
+import { Button, Icon } from 'semantic-ui-react'
 
 class ConfirmCheckin extends Component {
   constructor(props) {
@@ -39,8 +43,13 @@ class ConfirmCheckin extends Component {
           <p>{name} {surname}</p>
         </div>
         <div className="card-action">
-          <a onClick={ () => this.handleCancel() } className="waves-effect waves-light btn-flat">cancel</a>
-          <a onClick={ () => this.handleCheckin(id) } className="waves-effect waves-light btn">check in</a>
+          <Button.Group>
+            <Button onClick={ () => this.handleCancel() }>Cancel</Button>
+            <Button.Or />
+            <Button positive
+              onClick={ () => this.handleCheckin(id) }> Check In
+            </Button>
+          </Button.Group>
         </div>
       </div>
     ) 
