@@ -29,3 +29,4 @@ To Do:
 - Add an Avatar component and substitute it for any references B2B members in dependent components
 - Re-style app to be a little more eye pleasing
 - Refactor
+
