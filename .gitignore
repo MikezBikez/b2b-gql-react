@@ -3,3 +3,4 @@ node_modules
 thumbs.db
 .vscode/
 .deploy/
+dist
