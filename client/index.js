@@ -4,8 +4,10 @@ import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloProvider } from 'react-apollo'
+import { BrowserRouter } from 'react-router-dom'
 
-import Routes from './router'
+// import Routes from './router'
+import App from './components/App'
 
 const client = new ApolloClient({
   link: createHttpLink({ 
@@ -19,9 +21,11 @@ const client = new ApolloClient({
 
 const Root = () => {
   return (
-    <ApolloProvider client={client}>
-      <Routes />
-    </ApolloProvider>
+    <BrowserRouter>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </BrowserRouter>
   )
 }
 

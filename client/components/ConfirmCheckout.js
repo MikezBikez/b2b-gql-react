@@ -1,55 +1,43 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {graphql} from 'react-apollo'
 import query from '../queries/personFetch'
 import nextQuery from '../queries/CheckedInList'
 import otherQuery from '../queries/notCheckedInList'
 import {CheckOut} from '../mutations/CheckInOut'
 import Loader from './Loader'
-import {hashHistory} from 'react-router'
 
-class ConfirmCheckout extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      errors: []
-    }
-  }
+const ConfirmCheckout = (props) => {
 
-  handleCheckout (id) {
-    this.props.mutate({
-      variables: {id},
-      refetchQueries: [{ query: nextQuery }, { query: otherQuery }]
-    })
-    .then(hashHistory.push(`/people/whosIn`))
-  }
+const handleCheckout = (id) => {
+  props.mutate({
+    variables: {id},
+    refetchQueries: [{ query: nextQuery }, { query: otherQuery }]
+  })
+  .then(props.history.push(`/people/whosIn`))
+}
 
-  handleCancel () {
-    hashHistory.goBack()
-  }
-   
-  render () {
+const handleCancel = () => props.history.goBack()
 
-    if (this.props.data.loading) {return <Loader />}
+  if (props.data.loading) {return <Loader />}
 
-    let { id, name, surname, avatar } = this.props.data.person
+  let { id, name, surname, avatar } = props.data.person
 
-    return (
-      <div key={id} className="card">
-        <div className="card-content">
-          <p>{name} {surname}</p>
-        </div>
-        <div className="card-action">
-          <a onClick={ () => this.handleCancel() } className="waves-effect waves-light btn-flat">cancel</a>
-          <a onClick={ () => this.handleCheckout(id) } className="waves-effect waves-light btn">check out</a>
-        </div>
+  return (
+    <div key={id} className="card">
+      <div className="card-content">
+        <p>{name} {surname}</p>
       </div>
-    ) 
-  }
+      <div className="card-action">
+        <a onClick={ () => handleCancel() } className="waves-effect waves-light btn-flat">cancel</a>
+        <a onClick={ () => handleCheckout(id) } className="waves-effect waves-light btn">check out</a>
+      </div>
+    </div>
+  ) 
 }
 
 export default graphql(query, 
   {
-    options: (props) => { return {variables: {id: props.params.id} }}
+    options: (props) => { return {variables: {id: props.match.params.id} }}
   })
   (graphql(CheckOut)(ConfirmCheckout)
 )

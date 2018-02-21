@@ -1,32 +1,24 @@
-import React, {Component} from 'react'
-import { hashHistory } from 'react-router'
+import React from 'react'
 
-export default class Header extends Component {
+const Header = (props) => {
 
-  onWhosIn () {
-    hashHistory.push('/people/whosIn')
-  }
+  const onWhosIn = () => props.history.push('/people/whosIn')
+  const onCheckin = () => props.history.push('/people/checkIn')
+  const onPeopleList = () => props.history.push('/people/list')
+  const onHome = () => props.history.push('/')
 
-  onCheckin () {
-    hashHistory.push('/people/checkIn')
-  }
-
-  onPeopleList () {
-    hashHistory.push('/people/list')
-  }
-
-  render () {
-    return (
-      <nav>
-        <div className="nav-wrapper">
-          <a href="#" className="brand-logo">Back to Bikes</a>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li><a onClick={this.onWhosIn}>Who's In Today</a></li>
-            <li><a onClick={this.onCheckin}>Check In</a></li>
-            <li><a onClick={this.onPeopleList}>The Gang</a></li>
-          </ul>
-        </div>
-      </nav>
-    )
-  }
+  return (
+    <nav>
+      <div className="nav-wrapper">
+        <a onClick={onHome} className="brand-logo">Back to Bikes</a>
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <li><a onClick={onWhosIn}>Who's In Today</a></li>
+          <li><a onClick={onCheckin}>Check In</a></li>
+          <li><a onClick={onPeopleList}>The Gang</a></li>
+        </ul>
+      </div>
+    </nav>
+  )
 }
+
+export default Header

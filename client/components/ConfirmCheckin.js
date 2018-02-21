@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {graphql} from 'react-apollo'
 import query from '../queries/personFetch'
 import nextQuery from '../queries/CheckedInList'
@@ -7,58 +7,46 @@ import {CheckIn} from '../mutations/CheckInOut'
 import Loader from './Loader'
 import Avatar from './Avatar'
 
-import {hashHistory} from 'react-router'
-
 import { Button, Icon } from 'semantic-ui-react'
 
-class ConfirmCheckin extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      errors: []
-    }
-  }
+const ConfirmCheckin = (props) => {
 
-  handleCheckin (id) {
-    this.props.mutate({
+  const handleCancel = () => props.history.goBack()
+
+  const handleCheckin = (id) => {
+    props.mutate({
       variables: {id},
       refetchQueries: [{ query: nextQuery }, { query: otherQuery }]
     })
-    .then(hashHistory.push(`/people/whosIn`))
+    .then(props.history.push(`/people/whosIn`))    
   }
 
-  handleCancel () {
-    hashHistory.goBack()
-  }
-   
-  render () {
+  if (props.data.loading) {return <Loader />}
 
-    if (this.props.data.loading) {return <Loader />}
+  let { id, name, surname, avatar } = props.data.person
 
-    let { id, name, surname, avatar } = this.props.data.person
-
-    return (
-      <div key={id} className="card">
-        <div className="card-content">
-          <p>{name} {surname}</p>
-        </div>
-        <div className="card-action">
-          <Button.Group>
-            <Button onClick={ () => this.handleCancel() }>Cancel</Button>
-            <Button.Or />
-            <Button positive
-              onClick={ () => this.handleCheckin(id) }> Check In
-            </Button>
-          </Button.Group>
-        </div>
+  return (
+    <div key={id} className="card">
+      <div className="card-content">
+        <p>{name} {surname}</p>
       </div>
-    ) 
-  }
+      <div className="card-action">
+        <Button.Group>
+          <Button onClick={ () => handleCancel() }>Cancel</Button>
+          <Button.Or />
+          <Button positive
+            onClick={ () => handleCheckin(id) }> Check In
+          </Button>
+        </Button.Group>
+      </div>
+    </div>
+  ) 
+
 }
 
 export default graphql(query, 
   {
-    options: (props) => { return {variables: {id: props.params.id} }}
+    options: (props) => { return {variables: {id: props.match.params.id} }}
   })
   (graphql(CheckIn)(ConfirmCheckin)
 )

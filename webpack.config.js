@@ -41,7 +41,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'client/index.html'
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    // new webpack.optimize.UglifyJsPlugin(),
     // new ExtractTextPlugin('style.css'),
     // new BundleAnalyzerPlugin(),
   ]
