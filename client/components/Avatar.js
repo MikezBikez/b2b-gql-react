@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import PropTypes from 'prop-types'
+import ReactDOM from 'react-dom'
 
 Avatar.propTypes = {
   _id: PropTypes.string.isRequired,

@@ -1,48 +1,32 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {graphql} from 'react-apollo'
 import query from '../queries/CheckedInList'
 import Loader from './Loader'
 import {hashHistory} from 'react-router'
 
-class CheckedInList extends Component {
-  constructor(props) {
-    super(props)
+const CheckedInList = (props) => {
 
-    this.handleCheckout.bind(this)
-  }
-
-
-  handleCheckout (id) {
-    hashHistory.push(`/people/${id}/confirmCheckout`)
-  }
+  const handleCheckout = (id) => props.history.push(`/people/${id}/confirmCheckout`)
   
-  renderItems () {
-    return ( 
-      this.props.data.checkedIn.map( ({ id, name, surname}) => {
-      return (
-        <li key={id} className="collection-item"
-          >
+  const renderItems = (checkedIn) => 
+      checkedIn.map( ({ id, name, surname}) => 
+        <li key={id} className="collection-item">
           {name} {surname}
             <a className="waves-effect waves-light btn btn-xs mini right floated"
-              onClick={ () => this.handleCheckout(id) } >
+              onClick={ () => handleCheckout(id) } >
               Checkout
             </a>
         </li>
-      )}
-    ))
-  }
-  
-  render () {
+      )
 
-    if (this.props.data.loading) {return <Loader />}
+    if (props.data.loading) {return <Loader />}
 
     return (
       <ul className="collection with-header">
         <li className="collection-header"><h4>People checked in</h4></li>
-        {this.renderItems()}
+        {renderItems(props.data.checkedIn)}
       </ul>
     ) 
-  }
 }
 
 export default graphql(query)(CheckedInList)
